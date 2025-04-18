@@ -1,0 +1,31 @@
+-- making a database
+CREATE DATABASE DatingAppDBSF;
+GO
+
+-- Using the newly created database
+USE DatingAppDBSF;
+GO
+
+-- make UserAccounts table
+CREATE TABLE UserAccounts (
+    Username NVARCHAR(50) PRIMARY KEY,
+    Password NVARCHAR(50) NOT NULL
+);
+GO
+
+-- make the PersonProfiles table with a composite primary key.
+CREATE TABLE PersonProfiles (
+    UserName NVARCHAR(50) NOT NULL,
+    Id INT NOT NULL,
+    Name NVARCHAR(100) NULL,
+    Age INT NULL,
+    Gender NVARCHAR(20) NULL,
+    Interests NVARCHAR(255) NULL,
+    MatchPreferences NVARCHAR(255) NULL,
+    City NVARCHAR(50) NULL,
+    Country NVARCHAR(50) NULL,
+    CONSTRAINT PK_PersonProfiles PRIMARY KEY (UserName, Id),
+    CONSTRAINT FK_PersonProfiles_UserAccounts 
+        FOREIGN KEY (UserName) REFERENCES UserAccounts(Username)
+);
+GO
